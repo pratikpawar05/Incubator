@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Input;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -28,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -51,6 +54,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'role_id' => 'required',
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -63,10 +67,40 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        $fileName = 'null';
+            if (Input::file('user_logo')->isValid()) {
+                $destinationPath = public_path('image');
+                $extension = Input::file('user_logo')->getClientOriginalExtension();
+                $fileName = uniqid().'.'.$extension;
+                
+                Input::file('user_logo')->move($destinationPath, $fileName);
+            }
+
+
+        // dd($data);
+        $result =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'user_logo' => $fileName,
+            'role_id' => $data['role_id'],
             'password' => Hash::make($data['password']),
         ]);
+        return $result;
     }
+
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $roles=Role::all();
+        return view('auth.register', compact('roles'));
+    }
+
+
+    
 }
