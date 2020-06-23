@@ -158,19 +158,18 @@ Route::group(['middleware' => 'App\Http\Middleware\RolePermissionMiddleware'], f
     Route::post('import', 'RevenueController@import')->name('import')->defaults('identity', 'Revenue,r');
 
     // ==================Expense routes begins=======================//
+    
     Route::get('/expense/index/', 'ExpenseController@index')->name('view_expense')->defaults('identity', 'Expense,r');
     Route::get('/expense/create', 'ExpenseController@create')->name('add_expense')->defaults('identity', 'Expense,c');
     Route::get('/expense/store', 'ExpenseController@store')->name('store_expense')->defaults('identity', 'Expense,c');
     Route::get('/expense/edit/{expense_id}', 'ExpenseController@edit')->name('edit_expense')->defaults('identity', 'Expense,u');
     Route::post('/expense/update/{expense_id}', 'ExpenseController@update')->name('update_expense')->defaults('identity', 'Expense,u');
     Route::get('/expense/delete/{expense_id}', 'ExpenseController@destroyExpense')->name('delete_expense')->defaults('identity', 'Expense,d');
+    Route::get('createExpense', 'ExpenseController@create')->name('createExpense')->defaults('identity', 'Expense,c');
+    Route::post('store-expense/{id}', 'ExpenseController@storeExpense')->name('storeExpense')->defaults('identity', 'Expense,c');
+    Route::get('filter/{year}/{month}', 'ExpenseController@filterExpense')->name('filterExpense')->defaults('identity', 'Expense,r');
 
     // ==================Expense routes ends========================
-    Route::get('createExpense', 'ExpenseController@create')->name('createExpense')->defaults('identity', 'Expense,c');
-
-    Route::post('store-expense/{id}', 'ExpenseController@storeExpense')->name('storeExpense')->defaults('identity', 'Expense,c');
-
-    Route::get('filter/{year}/{month}', 'ExpenseController@filterExpense')->name('filterExpense')->defaults('identity', 'Expense,r');
 
     Route::get('profit_vs_burns/', 'RevenueExpense@profit_vs_burns')->defaults('identity', 'Monthly P&L,r');
     Route::get('monthlyProfitDisplay/{date}', 'RevenueExpense@monthlyProfitDisplay')->defaults('identity', 'Monthly P&L,r');
