@@ -193,4 +193,4 @@ Route::group(['middleware' => 'App\Http\Middleware\RolePermissionMiddleware'], f
 
     Route::get('member_agreement/{company_id}', 'RevenueController@companyAgreementTable')->defaults('identity', 'Company,r');
 
-}); 
+});

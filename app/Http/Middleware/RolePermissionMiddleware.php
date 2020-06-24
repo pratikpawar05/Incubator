@@ -28,7 +28,8 @@ class RolePermissionMiddleware
             abort(401, "You are not authorized to see this page");
         }
         catch (Exception $e) {
-            abort(401, "You are not authorized to see this page");
+            // abort(401, "You are not authorized to see this page");
+            return redirect('/login');
         }
     }
 }
