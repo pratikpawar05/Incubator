@@ -4,202 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SalesData;
-use App\Add_visitor;
 use App\Member;
-use App\Consumption;
 use App\User;
 use App\Expense;
 use Carbon\Carbon;
 use DB;
-use Facebook\Facebook;
 use Goutte\Client;
 use App\ReturnSd;
 use Config;
 
 class AdminController extends Controller
 {
-
-    public function index(Facebook $fb)
-    {
-
-        $data = DB::select('SELECT * FROM admin.sales_data where Stage_of_client= "HOT";');
-        $count_sales = count($data);
-
-        $visitors_data = Add_visitor::all();
-        $visitor_count = count($visitors_data);
-
-        $data = DB::select('SELECT * FROM admin.company_masters where status = "1";');
-        $member_count = count($data);
-
-        $obj = DB::select("SELECT gender, count(*) as count FROM admin.employeelists group by gender ;");
-
-        $gender["male"] = $obj[1]->count;
-        $gender["female"] = $obj[0]->count;
-
-        $Emp_data = DB::select('SELECT * FROM admin.employeelists where status= "Active";');
-        $employee_count = count($Emp_data);
-
-        $db_rent = DB::select('SELECT payment_month, SUM(monthly_rent) as amount from company_revenues GROUP BY payment_month order by payment_month desc');
-        $db_alternate = DB::select('SELECT payment_month, SUM(total_amt) as amount from additional_revenues GROUP BY payment_month order by payment_month desc');
-
-        $rent = [];
-        $alternate = [];
-
-        for ($i = 0; $i < count($db_rent); $i++) {
-            $rent[((array) $db_rent[$i])['payment_month']] = ((array) $db_rent[$i])['amount'];
-        }
-
-        for ($i = 0; $i < count($db_alternate); $i++) {
-            $alternate[((array) $db_alternate[$i])['payment_month']] = ((array) $db_alternate[$i])['amount'];
-        }
-
-        foreach ($rent as $key => $value) {
-            if (!in_array($key, array_keys($alternate)))
-                $alternate[$key] = 0;
-        }
-
-        foreach ($alternate as $key => $value) {
-            if (!in_array($key, array_keys($rent)))
-                $rent[$key] = 0;
-        }
-        krsort($rent);
-        krsort($alternate);
-        //dd($rent);
-        $dates = array_keys($rent);
-        $rent_value = array_values($rent);
-        $alternate_value = array_values($alternate);
-        $total_revenue = [];
-        for ($i = 0; $i < count($rent); $i++) {
-            $total_revenue[$dates[$i]] = $rent_value[$i] + $alternate_value[$i];
-        }
-        krsort($total_revenue);
-        $Member_data = DB::select('SELECT * FROM admin.employeelists order by updated_at desc limit 3;');
-
-        $db_data = DB::select('SELECT date, total from expenses order by date desc limit 5');
-
-        // dd($db_data);
-        $db_expense = [];
-        foreach ($db_data as $value) {
-            $db_expense[((array) $value)['date']] = ((array) $value)['total'];
-        }
-        $d = array_keys($db_expense);
-        if (in_array(date('Y-m'), $d))
-            $current_expense = $db_expense[date('Y-m')];
-        else
-            $current_expense = 0;
-
-        foreach ($db_expense as $key => $value) {
-            if (!in_array($key, array_keys($total_revenue)))
-                $total_revenue[$key] = 0;
-        }
-
-        foreach ($total_revenue as $key => $value) {
-            if (!in_array($key, array_keys($db_expense)))
-                $db_expense[$key] = 0;
-        }
-        // dd($d);
-
-        krsort($total_revenue);
-        krsort($db_expense);
-        $keys = array_keys($total_revenue);
-
-        $bottom = [];
-        $expense = [];
-        $dates = [];
-        $revenue = [];
-        for ($index = 0; $index < count($keys); $index++) {
-            $bottom['label'] = $keys[$index];
-            $dates[] = $bottom;
-            $bottom = [];
-            $bottom['value'] = (string) $db_expense[$keys[$index]];
-            $expense[] = $bottom;
-            $bottom = [];
-            $bottom['value'] = (string) $total_revenue[$keys[$index]];
-            $revenue[] = $bottom;
-            $bottom = [];
-        }
-
-        $revenue_data = DB::select('SELECT payment_month as label, sum(total_amt) value 
-                                    from(
-                                        select payment_month , total_amt 
-                                        from additional_revenues
-                                        union all
-                                        select payment_month , monthly_rent 
-                                        from company_revenues where payment_status="RECEIVED"
-                                    )t
-                                    group by payment_month 
-                                    order by payment_month desc limit 5;');
-
-        /////////////////////////////Facebook Functionality///////////////////////////
-        $fb = new Facebook([
-            'app_id' => '248172966221505',
-            'app_secret' => 'f601fccff72b709db347ef310b30f805',
-            'default_graph_version' => 'v6.0',
-            'default_access_token' => 'EAADhtkVZBlsEBAPcvT435AZBBfOVKOtjooLSOnJwrcD2kxnoBo1wG7OMAKfhpcR5UWD7ZCIgUzIZBi0eNiHHzBN10JUxJx8GuzTuGjZCM5WKYVBTq1XwBZAXeKBj7za0rO17WOWXAPevajCtpRAO8mJPjxkOH8l7pFsBeWJWfBGwZDZD',
-        ]);
-
-        //Use one of the helper classes to get a Facebook\Authentication\AccessToken entity.
-        $helper = $fb->getRedirectLoginHelper();
-        $response = $fb->get('/me?fields=id,name,fan_count,about');
-        $profilePic = "https://graph.facebook.com/114424669990291/picture?height=650&width=650";
-        $userData = $response->getGraphUser();
-        ///////////////////////////////////////////////////////////////////////////
-
-        /////////////////////////////Instagram Functionality///////////////////////////
-        $username = 'mewoworknest';
-        $response = @file_get_contents("https://www.instagram.com/$username/?__a=1");
-
-        if ($response !== false) {
-            $data = json_decode($response, true);
-            $instagram = [];
-            if ($data !== null) {
-                $full_name = $data['graphql']['user']['full_name'];
-                $following  = $data['graphql']['user']['edge_follow']['count'];
-                $followers  = $data['graphql']['user']['edge_followed_by']['count'];
-                $profile = $data['graphql']['user']['profile_pic_url_hd'];
-                $instagram['username'] = $username;
-                $instagram['full_name'] = $full_name;
-                $instagram['followers'] = $followers;
-                $instagram['following'] = $following;
-                $instagram['profile'] = $profile;
-            }
-        } else {
-            echo 'Username not found.';
-        }
-        ///////////////////////////////////////////////////////////////////////////////
-
-        // $data = user::where('id', auth()->user()->id)->first();
-        // $name = $data->name;
-        // $name_pass = $name[0];
-        // 
-
-        $current_revenue = DB::select('SELECT payment_month as label, sum(total_amt) value 
-                                    from(
-                                        select payment_month , total_amt 
-                                        from additional_revenues
-                                        union all
-                                        select payment_month , monthly_rent 
-                                        from company_revenues where payment_status="RECEIVED"
-                                    )t
-                                    group by payment_month 
-                                    order by payment_month desc limit 1;');
-        // dd($current_revenue[0]->label);
-
-        $DepositeReceived = DB::select('SELECT sum(deposit_received) as deposite_receives FROM admin.company_deals;');
-        // dd($DepositeReceived[0]->deposite_receives);
-
-        // dd($gender);
-        return view('admin.index', compact('visitor_count', 'instagram', 'profilePic', 'userData', 'member_count', 'gender', 'count_sales', 'employee_count', 'Member_data', 'expense', 'revenue', 'dates', 'revenue_data', 'current_expense', 'current_revenue', 'DepositeReceived'));
-    }
-
     public function fonikIndex()
     {
 
         $data = DB::select('SELECT * FROM admin.sales_data where Stage_of_client= "HOT";');
         $count_sales = count($data);
 
-        $visitors_data = Add_visitor::all();
-        $visitor_count = count($visitors_data);
+        // $visitors_data = Add_visitor::all();
+        // $visitor_count = count($visitors_data);
 
         $data = DB::select('SELECT * FROM admin.company_masters where status = "1";');
         $member_count = count($data);
@@ -325,27 +148,6 @@ class AdminController extends Controller
                                     group by payment_month 
                                     order by payment_month desc;');
         // dd($revenue_data);
-
-        /////////////////////////////Facebook Functionality///////////////////////////
-        $fb = new Facebook([
-            'app_id' => '248172966221505',
-            'app_secret' => 'f601fccff72b709db347ef310b30f805',
-            'default_graph_version' => 'v6.0',
-            'default_access_token' => 'EAADhtkVZBlsEBAPcvT435AZBBfOVKOtjooLSOnJwrcD2kxnoBo1wG7OMAKfhpcR5UWD7ZCIgUzIZBi0eNiHHzBN10JUxJx8GuzTuGjZCM5WKYVBTq1XwBZAXeKBj7za0rO17WOWXAPevajCtpRAO8mJPjxkOH8l7pFsBeWJWfBGwZDZD',
-        ]);
-
-        // dd($fb);
-        //Use one of the helper classes to get a Facebook\Authentication\AccessToken entity.
-        $helper = $fb->getRedirectLoginHelper();
-        // dd($helper);
-        $response = $fb->get('/me?fields=id,name,fan_count,about');
-        // dd($response);
-        $profilePic = "https://graph.facebook.com/114424669990291/picture?height=650&width=650";
-        $userData = $response->getGraphUser();
-        // dd($userData);
-        ///////////////////////////////////////////////////////////////////////////
-
-        //Construct a Facebook URL
 
         /////////////////////////////Instagram Functionality///////////////////////////
         $username = 'mewoworknest';
@@ -529,7 +331,7 @@ where consumption_month = "2020-05" ;');
 
            //  $date = $today->year.'-'.$today->month;
 
-            $current_consumption_month = Consumption::orderBy('id', 'DESC')->get();
+            // $current_consumption_month = Consumption::orderBy('id', 'DESC')->get();
             // dd($current_consumption_month);
 
 
@@ -701,18 +503,6 @@ where consumption_month = "2020-05" ;');
 
         $facebook_follower_count=$GLOBALS['a'];
         //dd($facebook_follower_count);
-
-
-         // $revenue_data = DB::select('SELECT payment_month as label, sum(total_amt)/count(payment_month) as value 
-         //                            from(
-         //                                select payment_month , total_amt 
-         //                                from additional_revenues
-         //                                union all
-         //                                select payment_month , monthly_rent 
-         //                                from company_revenues
-         //                            )t
-         //                            group by payment_month 
-         //                            order by payment_month Desc;');
 
          $revenue_data = DB::select('SELECT payment_month as label, sum(monthly_rent)/sum(no_of_seats) as value from company_revenues group by payment_month order by payment_month Desc;');
 
@@ -910,7 +700,7 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
 
 
         // ===============End Return======================================
-        return view('fonik_theme.index', compact('visitor_count', 'instagram', 'profilePic', 'userData', 'member_count', 'count_sales', 'employee_count', 'Member_data', 'expense', 'revenue', 'dates', 'revenue_data', 'current_expense', 'current_revenue', 'DepositeReceived', 'male', 'female', 'current_consumption_month', 'profit_value', 'total_revenue_value', 'mewo', 'total_revenues', 'monthCount','month','employee_count', 'tw_followers','mewo_expense_data','facebook_follower_count','avg_data','check','profit_data_value','current_revenue_month','total_revenue_current_month','return_sd_amount','occupency','revenue_per_sq_feet','may_due_amount','counsumption_data_dashboard', 'occupancy_percentage_data','db_expense'));
+        return view('dashboard.index', compact('visitor_count', 'instagram', 'profilePic', 'userData', 'member_count', 'count_sales', 'employee_count', 'Member_data', 'expense', 'revenue', 'dates', 'revenue_data', 'current_expense', 'current_revenue', 'DepositeReceived', 'male', 'female', 'current_consumption_month', 'profit_value', 'total_revenue_value', 'mewo', 'total_revenues', 'monthCount','month','employee_count', 'tw_followers','mewo_expense_data','facebook_follower_count','avg_data','check','profit_data_value','current_revenue_month','total_revenue_current_month','return_sd_amount','occupency','revenue_per_sq_feet','may_due_amount','counsumption_data_dashboard', 'occupancy_percentage_data','db_expense'));
         // return view("fonik_theme.index",compact('male','female'));
 
     }
@@ -942,9 +732,5 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
             ]]);
             DB::connection('millenial_pod');
         }
-
-
-
-
     }
 }

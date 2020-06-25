@@ -65,7 +65,6 @@ Route::group(['middleware' => 'App\Http\Middleware\RolePermissionMiddleware'], f
     // ============Company Routes ends
 
 
-    // Route::get('/admin', 'AdminController@index')->name('admin');
     Route::get('/admin', 'AdminController@fonikIndex')->name('admin')->defaults('identity', 'Dashboard,r');
     // Route::get('/admin', 'AdminController@toggleCompany');
 
