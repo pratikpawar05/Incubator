@@ -418,7 +418,7 @@ where consumption_month = "2020-05" ;');
         foreach ($total_revenue as $month => $value) {
             // dd($month);
             if ($month <= $todayDate) {
-                $total_revenue_value = $value;
+                $total_revenue_value1 = $value;
                 break;
             }
         }
@@ -430,6 +430,8 @@ where consumption_month = "2020-05" ;');
         foreach ($profit as $month => $value) {
             if ($month <= $todayDate) {
                 $profit_value = $value;
+                $profit_value1 = $value;
+
                 break;
             }
         }
@@ -490,19 +492,23 @@ where consumption_month = "2020-05" ;');
          $client = new Client();
         try {
             $crawler = $client->request('GET',"https://en-gb.facebook.com/MeWoWorkNest?locale=en_GB");
-            $crawler->filter('div[class=_4bl9]')->each(function ($node,$i){
-            if ($i==1) {
-                $headline = $node->text();
-                $GLOBALS['a'] = explode(" ",$headline)[0];
-                //print_r($facebook_follower_count);      
-            }
-        });             
-         } catch (Exception $e) {
+            $x=$crawler->filter('div[class=_4bl9]')->eq(1);
+            $y=$crawler->filter('div[class=_4bl9]')->eq(0);
+            $facebook_follower_count=explode(" ",$x->text())[0];
+            $facebook_like_count=explode(" ",$y->text())[0];
+            
+            //     $crawler->filter('div[class=_4bl9]')->each(function ($node,$i){
+        //     if ($i==1) {
+        //         $headline = $node->text();
+        //         $GLOBALS['a'] = explode(" ",$headline)[0];
+        //         //print_r($facebook_follower_count);
+                
+        //     }
+        // });
+
+    } catch (Exception $e) {
              //echo $e;
          } 
-
-        $facebook_follower_count=$GLOBALS['a'];
-        //dd($facebook_follower_count);
 
          $revenue_data = DB::select('SELECT payment_month as label, sum(monthly_rent)/sum(no_of_seats) as value from company_revenues group by payment_month order by payment_month Desc;');
 
@@ -603,7 +609,7 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
         if (empty($occupancy_percentage_data))
             $occupancy_percentage_data = 0;
         else
-            $occupancy_percentage_data = round((int)$occupancy_percentage_data[0]->occupancy / config('global.total_seats') * 100);
+            $occupancy_percentage_data = round((int)$occupancy_percentage_data[0]->occupancy / 90 * 100);
 
         $revenue_data = DB::select('SELECT payment_month as label, sum(invoice_amount) value 
                                     from(
@@ -695,12 +701,12 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
         // dd($current_expense);
 
 
-
+        $db_expense1 = DB::select('select date, total from expenses order by date desc');
 
 
 
         // ===============End Return======================================
-        return view('dashboard.index', compact('visitor_count', 'instagram', 'profilePic', 'userData', 'member_count', 'count_sales', 'employee_count', 'Member_data', 'expense', 'revenue', 'dates', 'revenue_data', 'current_expense', 'current_revenue', 'DepositeReceived', 'male', 'female', 'current_consumption_month', 'profit_value', 'total_revenue_value', 'mewo', 'total_revenues', 'monthCount','month','employee_count', 'tw_followers','mewo_expense_data','facebook_follower_count','avg_data','check','profit_data_value','current_revenue_month','total_revenue_current_month','return_sd_amount','occupency','revenue_per_sq_feet','may_due_amount','counsumption_data_dashboard', 'occupancy_percentage_data','db_expense'));
+        return view('dashboard.index', compact( 'instagram','profit_value1' ,'member_count','db_expense1', 'count_sales', 'employee_count', 'Member_data', 'expense', 'revenue', 'dates', 'revenue_data', 'current_expense', 'current_revenue', 'DepositeReceived', 'male', 'female', 'current_consumption_month', 'profit_value', 'total_revenue_value1', 'mewo', 'total_revenues', 'monthCount','month','employee_count', 'tw_followers','mewo_expense_data','facebook_follower_count','facebook_like_count','avg_data','check','profit_data_value','current_revenue_month','total_revenue_current_month','return_sd_amount','occupency','revenue_per_sq_feet','may_due_amount','counsumption_data_dashboard', 'occupancy_percentage_data','db_expense'));
         // return view("fonik_theme.index",compact('male','female'));
 
     }

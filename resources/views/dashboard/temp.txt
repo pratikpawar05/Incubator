@@ -1,0 +1,1 @@
+           line no 608                <span style="color: #89CFF0;" class="busines_titile">{{(int)($pl_data_C[0])}}</span><br>

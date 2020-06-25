@@ -605,7 +605,6 @@ a{
                                     
                             <a href="{{url('profit_sq')}}">
                                 
-                           <span style="color: #89CFF0;" class="busines_titile">{{(int)($pl_data_C[0])}}</span><br>
                             <span class="business_sq"> P&L PER SQ FT</span>
                             </a>
                                 </div>
@@ -753,10 +752,10 @@ a{
 
                         <div class="title">
                         <h4 class="size_badhao1">FACEBOOK : LIKES</h4>
-                        <span class="money" style=" color:#449D44;font-size: 1.5em;
+                        <span class="" style=" color:#449D44;font-size: 1.5em;
                                                   font-weight: 700;
                                                   font-variant: normal;
-                                                  letter-spacing: 1px;">{{$userData['fan_count'] }}</span>
+                                                  letter-spacing: 1px;">{{ $facebook_like_count }}</span>
                         </div>
 
 
