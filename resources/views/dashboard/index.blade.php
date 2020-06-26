@@ -313,59 +313,9 @@ a{
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                     <div class="col-md-6 col-xl-3">
-                        <div class="card text-center m-b-30 dashboard_card">
-                           <a href="{{url('security_deposits')}}">
-                            <div class="mb-2 card-body text-muted ">
-                               <h4 class="text-danger size_badhao1">INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
-                                            echo $fmt->format($DepositeReceived) ?>
-                                            
-                                            </h4>
-                                <span class="size_badhao">Security Deposit</span>
-                            </div>
-                        </a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3">
-                        <div class="card text-center m-b-30 dashboard_card">
-                            <a href="{{url('averagePrice')}}">
-                            <div class="mb-2 card-body text-muted">
-                                <h4 class="text-info size_badhao1">INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
-                                            echo $fmt->format((int)($avg_data)) ?>
-                                            
-                                    </h4>
-                                    <span class="size_badhao">Average Price</span>
-                            </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3">
-                        <div class="card text-center m-b-30 dashboard_card">
-                             <a href="{{url('operational_breakeven')}}">
-                            <div class="mb-2 card-body text-muted">
-                                <h4 class="text-purple size_badhao1">INR 7,900</h4>
-                                <span class="size_badhao">Operational Breakeven</span>                            </div>
-                             </a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3">
-                        <div class="card text-center m-b-30 dashboard_card">
-                            <a href="{{url('/read_return_sd')}}">
-                            <div class="mb-2 card-body text-muted ">
-                                <h4 class="text-primary size_badhao1">
-                                INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
-                                            echo $fmt->format((int)($return_sd_amount)) ?>                                
-                                </h4>
-                                <span class="size_badhao">Returns on SD</span>
-                            </div>
-                        </a>
-                        </div>
-                    </div>
-                </div>
             </div> 
-                @endif
+            @endif
+
                 @if (Auth::user()->isAuthenticated("Fin-head_Fin-exe Cards", "r"))
                 <div style="margin-left: 140px;" class="container-fluid">
                             
@@ -425,7 +375,6 @@ a{
                 </div>
 
                 <div class="row">
-
                      <div class="col-md-6 col-xl-3">
                         <div class="card text-center m-b-30 dashboard_card">
                              <a href="{{url('/monthly_due')}}">
@@ -437,62 +386,15 @@ a{
                         </a>
                         </div>
                     </div>
-
-                     <div class="col-md-6 col-xl-3">
-                        <div class="card text-center m-b-30 dashboard_card">
-                           <a href="{{url('security_deposits')}}">
-                            <div class="mb-2 card-body text-muted ">
-                               <h4 class="text-danger size_badhao1">INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
-                                            echo $fmt->format($DepositeReceived) ?>
-                                            
-                                            </h4>
-                                <span class="size_badhao">Security Deposit</span>
-                            </div>
-                        </a>
-                        </div>
-                    </div>
-                    <!-- <div class="col-md-6 col-xl-3">
-                        <div class="card text-center m-b-30 dashboard_card">
-                            <a href="{{url('averagePrice')}}">
-                            <div class="mb-2 card-body text-muted">
-                                <h4 class="text-info size_badhao1">INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
-                                            echo $fmt->format((int)($avg_data)) ?>
-                                            
-                                    </h4>
-                                    <span class="size_badhao">Average Price</span>
-                            </div>
-                            </a>
-                        </div>
-                    </div> -->
-                   <!--  <div class="col-md-6 col-xl-3">
-                        <div class="card text-center m-b-30 dashboard_card">
-                             <a href="{{url('operational_breakeven')}}">
-                            <div class="mb-2 card-body text-muted">
-                                <h4 class="text-purple size_badhao1">INR 7,900</h4>
-                                <span class="size_badhao">Operational Breakeven</span></div>
-                             </a>
-                        </div>
-                    </div> -->
-                    <div class="col-md-6 col-xl-3">
-                        <div class="card text-center m-b-30 dashboard_card">
-                            <a href="{{url('/read_return_sd')}}">
-                            <div class="mb-2 card-body text-muted ">
-                                <h4 class="text-primary size_badhao1">
-                                INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
-                                            echo $fmt->format((int)($return_sd_amount)) ?>                                
-                                </h4>
-                                <span class="size_badhao">Returns on SD</span>
-                            </div>
-                        </a>
-                        </div>
-                    </div>
                 </div>
+
+
             </div> 
-                @endif
+        @endif
 
 
                  </div>
-                    <!-- </div> --> -->
+                    <!-- </div> --> 
 
                 <div class="row">
 
@@ -514,54 +416,10 @@ a{
                         <div class="card m-b-30 dashboard_card">
                         <div style="height:590px;" class="card-body">
                             <center>
-                                    <span style="text-decoration: underline;" class="busines_data1">SOCIAL PENETRATION</span>
+                                    <span style="text-decoration: underline;" class="busines_data1">SOCIAL MEDIA PROFILES</span>
                                 </center>
                         <div  class="box">
                         <div class="container">
-
-                        <div class="row">
-
-                        <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                        <div class="box-part text-center">
-
-                        <i class="fa fa-google fa-3x" aria-hidden="true"></i>
-
-                        <div class="title">
-                        <h4 class="size_badhao1" >GOOGLE :REVIEW</h4>
-                         <span style=" color:#449D44;font-size: 1.5em;
-                              font-weight: 700;
-                              font-variant: normal;
-                              letter-spacing: 1px;">76</span>
-                        </div>
-
-
-                        <a href="https://www.google.com/search?sxsrf=ALeKk001p6jtxhGJlomJUeLgk55wYcLCJg%3A1588410274265&ei=ojetXsnaD5vcrQG64aHYCA&q=mewo+reviews&oq=mewo+reviews&gs_lcp=CgZwc3ktYWIQAzoECAAQRzoECCMQJzoGCAAQChAeOgQIABAeOgYIABANEB46BggAEBYQHjoICAAQFhAKEB46BQghEKABUKcqWJk8YPE-aABwAngAgAHDA4gBxw6SAQkwLjIuNS4wLjGYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab&ved=0ahUKEwjJs56x6ZTpAhUbbisKHbpwCIsQ4dUDCAw&uact=5#lrd=0x3bbfc1ade1338acd:0xc68e78c683a47e8d,1" target="_blank">Learn More</a>
-
-                        </div>
-                        </div>
-
-
-                        <div style="padding-left:160px;" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                        <div class="box-part text-center">
-
-                        <i class="fa fa-google fa-3x" aria-hidden="true"></i>
-
-                        <div class="title">
-                        <h4 class="size_badhao1">GOOGLE :LIKES</h4>
-                         <span style=" color:#449D44;font-size: 1.5em;
-                                              font-weight: 700;
-                                              font-variant: normal;
-                                              letter-spacing: 1px;">104</span>
-                        </div>
-
-
-                        <a href="https://www.google.com/search?sxsrf=ALeKk001p6jtxhGJlomJUeLgk55wYcLCJg%3A1588410274265&ei=ojetXsnaD5vcrQG64aHYCA&q=mewo+reviews&oq=mewo+reviews&gs_lcp=CgZwc3ktYWIQAzoECAAQRzoECCMQJzoGCAAQChAeOgQIABAeOgYIABANEB46BggAEBYQHjoICAAQFhAKEB46BQghEKABUKcqWJk8YPE-aABwAngAgAHDA4gBxw6SAQkwLjIuNS4wLjGYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab&ved=0ahUKEwjJs56x6ZTpAhUbbisKHbpwCIsQ4dUDCAw&uact=5#lrd=0x3bbfc1ade1338acd:0xc68e78c683a47e8d,1" target="_blank">Learn More</a>
-
-                        </div>
-                        </div>
-                        </div>
 
                         <div class="row">
 
@@ -581,7 +439,7 @@ a{
                         </div>
 
 
-                        <a href="https://www.facebook.com/MeWoWorkNest/" target="_blank">Learn More</a>
+                        <a href="https://www.facebook.com/facebookappIndia/" target="_blank">Learn More</a>
 
                         </div>
                         </div>  
@@ -601,7 +459,7 @@ a{
                         </div>
 
 
-                        <a href="https://www.facebook.com/MeWoWorkNest/" target="_blank">Learn More</a>
+                        <a href="https://www.facebook.com/facebookappIndia/" target="_blank">Learn More</a>
 
                         </div>
                         </div>   
@@ -609,18 +467,34 @@ a{
                         </div> 
 
                         <div class="row">
+                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                          <div class="box-part text-center">
+                           <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
+                           <div class="title">
+                          <h4 class="size_badhao1 ">TWITTER :FOLLOW</h4>
+                            <span class="money" style=" color:#449D44;font-size:1.5em;
+                                                      font-weight: 700;
+                                                      font-variant: normal;
+                                                      letter-spacing: 1px;">{{$tw_followers}}</span>
+                           </div>
+
+                        <a href="{{url('https://twitter.com/TwitterIndia')}}" target="_blank">Learn More</a>
+
+                        </div>
+                        </div>
 
 
 
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div style="padding-left:160px;" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                         <div class="box-part text-center">
 
                         <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
 
                         <div class="title">
-                        <h4 class="size_badhao1">TWITTER :FOLLOW</h4>
-                         <span style=" color:#449D44;font-size:1.5em;
+                        <h4 class="size_badhao1 ">TWITTER :FOLLOW</h4>
+                         <span class="money" style=" color:#449D44;font-size:1.5em;
                                                       font-weight: 700;
                                                       font-variant: normal;
                                                       letter-spacing: 1px;">{{$tw_followers}}</span>
@@ -629,10 +503,33 @@ a{
                         <!-- <div class="text">
                         </div> -->
 
-                        <a href="{{url('https://twitter.com/MeWoWorkNest')}}" target="_blank">Learn More</a>
+                        <a href="{{url('https://twitter.com/TwitterIndia')}}" target="_blank">Learn More</a>
 
                         </div>
                         </div>
+                        </div>
+                        <div class="row">
+
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                        <div class="box-part text-center">
+
+                        <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+
+                        <div class="title">
+                        <h4 class="size_badhao1">INSTAGRAM :FOLLOWERS</h4>
+                        <span class="money" style=" color:#449D44;font-size: 1.5em;
+                                              font-weight: 700;
+                                              font-variant: normal;
+                                              letter-spacing: 1px;">{{ $instagram['followers'] }}</span>
+                        </div>     
+
+                        <a href="https://www.instagram.com/instagram" target="_blank">Learn More</a>
+
+                        </div>
+                        </div>
+
 
                         <div style="padding-left:160px;" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
@@ -641,14 +538,14 @@ a{
                         <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
 
                         <div class="title">
-                        <h4 class="size_badhao1">INSTAGRAM :FOLLOW</h4>
-                        <span style=" color:#449D44;font-size: 1.5em;
+                        <h4 class="size_badhao1">INSTAGRAM :FOLLOWING</h4>
+                        <span class="money" style=" color:#449D44;font-size: 1.5em;
                                               font-weight: 700;
                                               font-variant: normal;
-                                              letter-spacing: 1px;">{{ $instagram['followers'] }}</span>
+                                              letter-spacing: 1px;">{{ $instagram['following'] }}</span>
                         </div>     
 
-                        <a href="https://www.instagram.com/mewoworknest" target="_blank">Learn More</a>
+                        <a href="https://www.instagram.com/instagram" target="_blank">Learn More</a>
 
                         </div>
                         </div>
@@ -659,350 +556,6 @@ a{
                         </div>
                         </div>
             </div>
-
-
-                <!-- <div style="" class="row">
-                    <div class="col-xl-6 offset-md-1">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-                                <h2 style="font-variant: normal;
-                                letter-spacing: 1px;color: grey;font-weight: 900;">Operational Breakeven : 7,900</h2>
-                                <div class="table-responsive">
-                                    <table class="table m-t-20 mb-0 table-vertical">
-
-                                        <thead>
-                                            <th>Sr No</th>
-                                            <th>Cost Title</th>
-                                            <th>Cost Per Person</th>
-                                            <th>More</th>
-                                        </thead>
-
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>Management</td>
-                                            <td>
-                                               INR {{ (int)($mewo[0]->salaries/90)}}
-                                            </td>
-                                            <td>
-                                                <a href="{{url('#')}}" class="btn btn-info">More</a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>Electricity</td>
-                                            <td>
-                                                INR {{ (int)($mewo[0]->electricity/90)}}
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                4
-                                            </td>
-                                            <td>Housekeeping</td>
-                                            <td>
-                                                INR {{ (int)($mewo[0]->huose_keeping/90)}}
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                5
-                                            </td>
-                                            <td>CCD</td>
-                                            <td>
-                                               INR {{ (int)($mewo[0]->ccd_materials/90)}}
-                                            </td>
-
-                                            <td>
-                                               <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                         <tr>
-                                            <td>
-                                                6
-                                            </td>
-                                            <td>Entertainment</td>
-                                            <td>
-                                                INR {{(int) ($mewo[0]->entertainment/90)}}
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                7
-                                            </td>
-                                            <td>Water</td>
-                                            <td>
-                                               INR {{ (int)($mewo[0]->water_bills/90)}}
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                8
-                                            </td>
-                                            <td>Internet</td>
-                                            <td>
-                                               INR {{ (int)($mewo[0]->internet_cable_rent/90)}}
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                9
-                                            </td>
-                                            <td>Stationary</td>
-                                            <td>
-                                              INR  {{ (int)($mewo[0]->stationery/90)}}                                                
-
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                10
-                                            </td>
-                                            <td>Marketing</td>
-                                            <td>
-                                            INR {{ (int)($mewo[0]->marketing/90)}}
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                11
-                                            </td>
-                                            <td>Tech</td>
-                                            <td>
-                                               INR {{ (int)($mewo[0]->tech/90)}}
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                12
-                                            </td>
-                                            <td>Generator</td>
-                                            <td>
-                                                INR {{ (int)($mewo[0]->generators/90)}}
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                13
-                                            </td>
-                                            <td>Travel</td>
-                                            <td>
-                                                INR {{(int) ($mewo[0]->travel/90)}}
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                14
-                                            </td>
-                                            <td>Gifting</td>
-                                            <td>
-                                                INR {{(int) ($mewo[0]->gifting/90)}}   
-                                            </td> 
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                15
-                                            </td>
-                                            <td>Pest Control</td>
-                                            <td>
-                                                INR {{ (int) ($mewo[0]->pest_control_monthly/90)}} 
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                16
-                                            </td>
-                                            <td>Misc.& Sundry</td>
-                                            <td>
-                                                INR {{(int) ($mewo[0]->misc_total/90)}} 
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info">More</button>
-                                            </td>  
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-<!-- 
-                    <div class="col-xl-4">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-                             <h2 style="font-variant: normal;
-                                letter-spacing: 1px;color: grey;font-weight: 900;">Active Meetings</h2>
-
-                                <div class="table-responsive">
-                                    <table class="table m-t-20 mb-0 table-vertical">
-                                        <thead>
-                                            <th>Sr No</th>
-                                            <th>Company</th>
-                                            <th>Time</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Fedex</td>
-                                                <td>7:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>amazon</td>
-                                                <td>11:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Mcaffen</td>
-                                                <td>10:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>google</td>
-                                                <td>12:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>microsoft</td>
-                                                <td>7:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>swift</td>
-                                                <td>5:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>swift</td>
-                                                <td>5:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td>swift</td>
-                                                <td>5:30</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <hr>
-                                        <span class="pull-right" style="-webkit-text-decoration-line: underline; /* Safari */
-                                        text-decoration-line: underline;color: blue; ">View all meetings</span>
-                                 </div>                                
-                            </div> -->
-<!--                             <div class="card-body">
-                                <h3 style="font-variant: normal;
-                                letter-spacing: 1px;color: grey;font-weight: 900;">Ended Meetings</h3>
-
-                                <div class="table-responsive">
-                                    <table class="table m-t-20 mb-0 table-vertical">
-                                        <thead>
-                                            <th>S No</th>
-                                            <th>Company</th>
-                                            <th>Time</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Fedex</td>
-                                                <td>7:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>amazon</td>
-                                                <td>11:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Mcaffen</td>
-                                                <td>10:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>google</td>
-                                                <td>12:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>microsoft</td>
-                                                <td>7:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>swift</td>
-                                                <td>5:30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>swift</td>
-                                                <td>5:30</td>
-                                            </tr>
-                                          <tr>
-                                                <td>8</td>
-                                                <td>swift</td>
-                                                <td>5:30</td>
-                                            </tr> -->
-<!--                                         </tbody>
-                                    </table>
-                                    <hr>
-                                        <span class="pull-right" style="-webkit-text-decoration-line: underline; /* Safari */
-                                        text-decoration-line: underline;color: blue; ">View all meetings</span>
-                                 </div> -->
-                                 
                                 
                             </div> 
 
