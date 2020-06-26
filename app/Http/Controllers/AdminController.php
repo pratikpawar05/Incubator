@@ -18,18 +18,18 @@ class AdminController extends Controller
     public function fonikIndex()
     {
 
-        $data = DB::select('SELECT * FROM admin.sales_data where Stage_of_client= "HOT";');
+        $data = DB::select('SELECT * FROM sales_data where Stage_of_client= "HOT";');
         $count_sales = count($data);
 
         // $visitors_data = Add_visitor::all();
         // $visitor_count = count($visitors_data);
 
-        $data = DB::select('SELECT * FROM admin.company_masters where status = "1";');
+        $data = DB::select('SELECT * FROM company_masters where status = "1";');
         $member_count = count($data);
 
         // dd($member_count);
 
-        $occupancyCount = DB::select("SELECT count(*) as count FROM admin.employeelists;");
+        $occupancyCount = DB::select("SELECT count(*) as count FROM employeelists;");
         $occupancyCount = $occupancyCount[0]->count;
 
         $mewoTotalCount = 90;
@@ -37,7 +37,7 @@ class AdminController extends Controller
         $occupancyRatio = (int) floor(($occupancyCount / $mewoTotalCount) * 100);
         // dd($occupancyRatio);
 
-        $Emp_data = DB::select('SELECT * FROM admin.employeelists where status= "1";');
+        $Emp_data = DB::select('SELECT * FROM employeelists where status= "1";');
         $employee_count = count($Emp_data);
 
         // dd($employee_count);
@@ -71,7 +71,7 @@ class AdminController extends Controller
         krsort($alternate);
 
         //Check the netTotal
-        $netTotal = DB::select("SELECT SUM(net_total) as net_total FROM admin.company_deals where net_total is not null AND net_total!=0;");
+        $netTotal = DB::select("SELECT SUM(net_total) as net_total FROM company_deals where net_total is not null AND net_total!=0;");
         $netTotal = $netTotal[0]->net_total;
 
         // dd($alternate);
@@ -88,7 +88,7 @@ class AdminController extends Controller
         //dd($total_revenue);
 
 
-        $Member_data = DB::select('SELECT * FROM admin.employeelists order by updated_at desc limit 3;');
+        $Member_data = DB::select('SELECT * FROM employeelists order by updated_at desc limit 3;');
 
         $db_data = DB::select('SELECT date, total from expenses order by date desc limit 5');
         $db_expense = [];
@@ -188,13 +188,13 @@ class AdminController extends Controller
                                     group by payment_month 
                                     order by payment_month desc limit 1;');
         // dd($current_revenue);
-        $DepositeReceived = DB::select('SELECT sum(deposit_received) as deposite_receives FROM admin.company_deals;');
+        $DepositeReceived = DB::select('SELECT sum(deposit_received) as deposite_receives FROM company_deals;');
         // dd($DepositeReceived[0]->deposite_receives);
 
 
 
         // return view("fonik_theme.index");
-        $obj = DB::select("SELECT gender, count(*) as count FROM admin.employeelists group by gender ;");
+        $obj = DB::select("SELECT gender, count(*) as count FROM employeelists group by gender ;");
 
         // dd($obj[0]->count);
 
@@ -219,7 +219,7 @@ class AdminController extends Controller
         // dd($gender_data);
 
 
-        $monthEmployee = DB::select("SELECT months, CEIL((count(*)/90)*100) as count FROM admin.employeelists where months is not null AND months !=' ' AND status = '1' group by months order by months;");
+        $monthEmployee = DB::select("SELECT months, CEIL((count(*)/90)*100) as count FROM employeelists where months is not null AND months !=' ' AND status = '1' group by months order by months;");
         
         // dd($monthEmployee);
 
@@ -293,7 +293,7 @@ class AdminController extends Controller
 
         $lastMonthObj = $today->year . "-" . $lastMonth;
            // dd($lastMonth);
-        $query = "SELECT FLOOR(internet/90) as internet, FLOOR(ellectricity_units/90) as ellectricity_units, FLOOR(ac_units/90) as ac_units, FLOOR(tea_cofee/90) as tea_cofee, FLOOR(water_liters/90) as water_liters, FLOOR(huose_keeping/90) as huose_keeping  FROM admin.consumptions where consumption_month like " . "'%" . $lastMonthObj . "" . "%'" . ";";
+        $query = "SELECT FLOOR(internet/90) as internet, FLOOR(ellectricity_units/90) as ellectricity_units, FLOOR(ac_units/90) as ac_units, FLOOR(tea_cofee/90) as tea_cofee, FLOOR(water_liters/90) as water_liters, FLOOR(huose_keeping/90) as huose_keeping  FROM consumptions where consumption_month like " . "'%" . $lastMonthObj . "" . "%'" . ";";
 
         $current_consumption_month = DB::select($query);
            // dd($current_consumption_month);
@@ -307,7 +307,7 @@ class AdminController extends Controller
         $date = $today->year . '-' . $today->month;
         // dd($date);
 
-        $counsumption_data_dashboard = DB::select('SELECT tea_cofee/seats as tea_cofee, internet/seats as internet, ellectricity_units/seats as ellectricity_units, water_liters/seats as water_liters, huose_keeping/seats as huose_keeping  from admin.consumptions 
+        $counsumption_data_dashboard = DB::select('SELECT tea_cofee/seats as tea_cofee, internet/seats as internet, ellectricity_units/seats as ellectricity_units, water_liters/seats as water_liters, huose_keeping/seats as huose_keeping  from consumptions 
 where consumption_month = "2020-05" ;');
         // dd($counsumption_data_dashboard); 
 
@@ -320,7 +320,7 @@ where consumption_month = "2020-05" ;');
 
            //  $lastMonthObj = $today->year."-".$lastMonth;
            //          //    dd($date);
-           // $query = "SELECT FLOOR(internet/90) as internet, FLOOR(ellectricity_units/90) as ellectricity_units, FLOOR(ac_units/90) as ac_units, FLOOR(tea_cofee/90) as tea_cofee, FLOOR(water_liters/90) as water_liters, FLOOR(huose_keeping/90) as huose_keeping  FROM admin.consumptions where consumption_month like "."'%".$lastMonthObj.""."%'".";";
+           // $query = "SELECT FLOOR(internet/90) as internet, FLOOR(ellectricity_units/90) as ellectricity_units, FLOOR(ac_units/90) as ac_units, FLOOR(tea_cofee/90) as tea_cofee, FLOOR(water_liters/90) as water_liters, FLOOR(huose_keeping/90) as huose_keeping  FROM consumptions where consumption_month like "."'%".$lastMonthObj.""."%'".";";
 
            // // dd($query);
            // $current_consumption_month = DB::select($query);
@@ -341,7 +341,7 @@ where consumption_month = "2020-05" ;');
 
 
 
-        $query = "SELECT  sum(amount_received) as amount_received, payment_month  FROM admin.company_revenues group by payment_month;";
+        $query = "SELECT  sum(amount_received) as amount_received, payment_month  FROM company_revenues group by payment_month;";
 
         $monthlyCollection = DB::select($query);
         // dd($monthlyCollection);
@@ -640,7 +640,7 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
 
         // ==============ruturn amount============================
 
-        $return_data =DB::select('SELECT * FROM admin.return_sds order by returns_sd_month desc;');
+        $return_data =DB::select('SELECT * FROM return_sds order by returns_sd_month desc;');
         // dd(round($Return_data[0]->sd_amount*0.75/100));
 
         $months=[];

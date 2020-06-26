@@ -50,7 +50,7 @@ class RevenueController extends Controller
         // dd($data);
 
         $total = DB::select('SELECT SUM(total_amt) as amount, sum(invoice_amt_gst) as invoice_amt,sum(invoice_amt_gst) as invoice_amt_gst,sum(total_amt) as total_amt
-      FROM admin.additional_revenues;');
+      FROM additional_revenues;');
         // dd($total);
 
         return view('revenue.additional_revenue', compact('data', 'total'));
@@ -173,7 +173,7 @@ class RevenueController extends Controller
         $company_statuses = ["RECEIVED", "PENDING", "--Select--"];
 
         $total = DB::select('SELECT SUM(total_amt) as amount, sum(invoice_amount) as invoice_amt,sum(invoice_amt_gst) as invoice_amt_gst,sum(total_amt) as total_amt
-FROM admin.revenues;');
+FROM revenues;');
 
         return view('revenue.additional_revenue', compact('data', 'total'));
     }
@@ -190,7 +190,7 @@ FROM admin.revenues;');
         // $company_statuses = ["RECEIVED", "PENDING","--Select--"];
 
         $total = DB::select('SELECT SUM(amount) as amount, sum(invoice_amount) as invoice_amt,sum(invoice_amt_gst) as invoice_amt_gst,sum(total_amt) as total_amt
-FROM admin.revenues;');
+FROM revenues;');
 
         return view('revenue.additional_revenue', compact('data', 'total'));
     }
@@ -210,7 +210,7 @@ FROM admin.revenues;');
     public function revenue_data()
     {
 
-        // $members = DB::select('SELECT members.id, members.Company_name, members.brand_name,count(*) as no_of_seats FROM admin.occupancies
+        // $members = DB::select('SELECT members.id, members.Company_name, members.brand_name,count(*) as no_of_seats FROM occupancies
         // join members on members.id = occupancies.company
         // join employeelists on employeelists.member_id = occupancies.company
         // where employeelists.status="Active" AND members.status="Active"
@@ -374,7 +374,7 @@ FROM admin.revenues;');
         $company_statuses = ["RECEIVED", "PENDING", "--Select--"];
 
         $total = DB::select('SELECT SUM(total_amt) as amount, sum(invoice_amount) as invoice_amt,sum(invoice_amt_gst) as invoice_amt_gst,sum(total_amt) as total_amt
-FROM admin.revenues;');
+FROM revenues;');
 
         return view('revenue.additional_revenue', compact('data', 'total'));
     }
@@ -401,7 +401,7 @@ FROM admin.revenues;');
 
     public function CombinedRevenue($date_flag = 0, $date = null)
     {
-        $occupancyCount = DB::select("SELECT count(*) as count FROM admin.employeelists;");
+        $occupancyCount = DB::select("SELECT count(*) as count FROM employeelists;");
         // dd($occupancyCount);
         $occupancyCount = $occupancyCount[0]->count;
 
@@ -410,7 +410,7 @@ FROM admin.revenues;');
         $occupancyRatio = (int) floor(($occupancyCount / $mewoTotalCount) * 100);
         // dd($occupancyRatio);
 
-        $Emp_data = DB::select('SELECT * FROM admin.employeelists where status= "1";');
+        $Emp_data = DB::select('SELECT * FROM employeelists where status= "1";');
         $employee_count = count($Emp_data);
 
         // dd($employee_count);
@@ -444,7 +444,7 @@ FROM admin.revenues;');
         krsort($alternate);
 
         //Check the netTotal
-        $netTotal = DB::select("SELECT company_revenues.payment_month, SUM(company_deals.net_total) as net_total FROM admin.company_deals join admin.company_revenues on company_deals.company_id = company_revenues.company_id group by company_revenues.payment_month order by company_revenues.payment_month desc;");
+        $netTotal = DB::select("SELECT company_revenues.payment_month, SUM(company_deals.net_total) as net_total FROM company_deals join company_revenues on company_deals.company_id = company_revenues.company_id group by company_revenues.payment_month order by company_revenues.payment_month desc;");
         // $netTotal = $netTotal[0]->net_total;
         // dd($netTotal);
 
@@ -477,7 +477,7 @@ FROM admin.revenues;');
         // dd($total_revenue);
 
 
-        $Member_data = DB::select('SELECT * FROM admin.employeelists order by updated_at desc limit 3;');
+        $Member_data = DB::select('SELECT * FROM employeelists order by updated_at desc limit 3;');
 
         $db_data = DB::select('SELECT date, total from expenses order by date desc limit 5');
         $db_expense = [];
@@ -550,13 +550,13 @@ FROM admin.revenues;');
                                     group by payment_month 
                                     order by payment_month desc limit 1;');
         // dd($current_revenue);
-        $DepositeReceived = DB::select('SELECT sum(deposit_received) as deposite_receives FROM admin.company_deals;');
+        $DepositeReceived = DB::select('SELECT sum(deposit_received) as deposite_receives FROM company_deals;');
         // dd($DepositeReceived[0]->deposite_receives);
 
 
 
         // return view("fonik_theme.index");
-        $obj = DB::select("SELECT gender, count(*) as count FROM admin.employeelists group by gender ;");
+        $obj = DB::select("SELECT gender, count(*) as count FROM employeelists group by gender ;");
 
         // dd($obj[0]->count);
 
@@ -567,7 +567,7 @@ FROM admin.revenues;');
         $gender_data = $obj[0]->count . ':' . $obj[1]->count;
         // dd($gender_data);    
 
-        $monthEmployee = DB::select("SELECT months, CEIL((count(*)/90)*100) as count FROM admin.employeelists where months is not null AND months !=' ' group by months order by months;");
+        $monthEmployee = DB::select("SELECT months, CEIL((count(*)/90)*100) as count FROM employeelists where months is not null AND months !=' ' group by months order by months;");
         // dd($monthEmployee);
 
         $today = Carbon::now();
@@ -892,12 +892,12 @@ FROM admin.revenues;');
 
         // dd($occupency);
 
-        $company_data = DB::select('SELECT count(*) as active_company FROM admin.company_masters where status=1;');
+        $company_data = DB::select('SELECT count(*) as active_company FROM company_masters where status=1;');
         // dd($company_data[0]->active_company);
 
         $member_count = $company_data[0]->active_company;
         // dd($member_count);
-        $employee = DB::select('SELECT count(*) as employee_list FROM admin.employeelists where status = 1;');
+        $employee = DB::select('SELECT count(*) as employee_list FROM employeelists where status = 1;');
         // dd($employee[0]->employee_list);
 
         // dd($month);
@@ -1088,7 +1088,7 @@ FROM admin.revenues;');
         $company_data = DB::select("SELECT id, company_registered_name as company_name, tenure, lock_in, start_date, end_date from company_masters where id = ?", [$company_id]);
         //dd($company_data);
 
-         $company_image = DB::select("SELECT banner_source FROM admin.company_masters where id = "."'".$company_id."'".";");
+         $company_image = DB::select("SELECT banner_source FROM company_masters where id = "."'".$company_id."'".";");
         // dd($company_image[0]);
         $image_mewo = $company_image[0]->banner_source;
 

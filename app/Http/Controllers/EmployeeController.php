@@ -115,7 +115,7 @@ class EmployeeController extends Controller
 
     public function addMembers(){
 
-     $member_data = DB::select("SELECT id, company_registered_name  FROM admin.company_masters;");
+     $member_data = DB::select("SELECT id, company_registered_name  FROM company_masters;");
 
      // $data = $member_data["member_name"];
      // dd($member_data);
@@ -228,7 +228,7 @@ class EmployeeController extends Controller
 
     public function activeEmployee(){
 
-        $ActiveEmployee = DB::select('SELECT * FROM admin.employeelists where status= "1";');
+        $ActiveEmployee = DB::select('SELECT * FROM employeelists where status= "1";');
         //dd($ActiveEmployee);
 
         // $data = count($ActiveEmployee);
@@ -239,7 +239,7 @@ class EmployeeController extends Controller
     }
     public function InactiveEmployee(){
 
-        $InactiveEmployee = DB::select('SELECT * FROM admin.employeelists where status= "Inactive";');
+        $InactiveEmployee = DB::select('SELECT * FROM employeelists where status= "Inactive";');
         // dd($InactiveEmployee);
 
         return view('company.employees.inactive_employee',compact('InactiveEmployee'));
@@ -264,7 +264,7 @@ class EmployeeController extends Controller
         // $data = Employeelist::find($employee_id);
     // dd($data);
         
-         $roles =DB::select('SELECT * FROM admin.employeelists;');
+         $roles =DB::select('SELECT * FROM employeelists;');
          // dd($roles);
         // $member_id = $data->members_id;
         $Employee_details = Employeelist::find($employee_id);
