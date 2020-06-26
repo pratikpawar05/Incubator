@@ -544,7 +544,7 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
 
-        dd($request->all());
+        // dd($request->all());
         
         // dd($permission_module);
 
@@ -932,6 +932,8 @@ class UsersController extends Controller
 
         $User_permission =  UserRolePermission::where('user_id',$id)->first();
         // dd($User_permission);
+        if (!$User_permission)
+            $User_permission = new UserRolePermission();
         $User_permission->role_id = $request->role;
         $User_permission->user_id = $id;
         $User_permission->permission_id = $permissions_data;
