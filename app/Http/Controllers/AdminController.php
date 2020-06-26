@@ -253,13 +253,13 @@ class AdminController extends Controller
 
         $lastMonthObj = $today->year . "-" . $lastMonth;
            // dd($lastMonth);
-        $query = "SELECT FLOOR(internet/90) as internet, FLOOR(ellectricity_units/90) as ellectricity_units, FLOOR(ac_units/90) as ac_units, FLOOR(tea_cofee/90) as tea_cofee, FLOOR(water_liters/90) as water_liters, FLOOR(huose_keeping/90) as huose_keeping  FROM consumptions where consumption_month like " . "'%" . $lastMonthObj . "" . "%'" . ";";
+        // $query = "SELECT FLOOR(internet/90) as internet, FLOOR(ellectricity_units/90) as ellectricity_units, FLOOR(ac_units/90) as ac_units, FLOOR(tea_cofee/90) as tea_cofee, FLOOR(water_liters/90) as water_liters, FLOOR(huose_keeping/90) as huose_keeping  FROM consumptions where consumption_month like " . "'%" . $lastMonthObj . "" . "%'" . ";";
 
-        $current_consumption_month = DB::select($query);
-           // dd($current_consumption_month);
-        if (count($current_consumption_month) != 0) {
-            $current_consumption_month = $current_consumption_month[0];
-        }
+        // $current_consumption_month = DB::select($query);
+        //    // dd($current_consumption_month);
+        // if (count($current_consumption_month) != 0) {
+        //     $current_consumption_month = $current_consumption_month[0];
+        // }
 
 
         // dd($payment_month);
@@ -422,10 +422,15 @@ class AdminController extends Controller
             $y=$crawler->filter('div[class=_4bl9]')->eq(0);
             $facebook_follower_count=explode(" ",$x->text())[0];
             $facebook_like_count=explode(" ",$y->text())[0];
-
-            // $twitter=$client->request('GET',"https://twitter.com/TwitterIndia?lang=en-GB");
-            // $temp=$twitter->filter('div');
-            // dd($temp->html());
+            $user_agent_old_phone = 'Nokia5310XpressMusic_CMCC/2.0 (10.10) Profile/MIDP-2.1 Configuration/CLDC-1.1 UCWEB/2.0 (Java; U; MIDP-2.0; en-US; Nokia5310XpressMusic) U2/1.0.0 UCBrowser/9.5.0.449 U2/1.0.0 Mobile';
+            
+        //     $twitter=$client->request('GET','https://twitter.com/TwitterIndia',[
+        //         'headers' =>  [ 
+        //         'User-Agent' => $user_agent_old_phone,
+        // ],]);
+        
+        //     $temp=$twitter->filter('div[class=statnum]');
+        //     dd($temp->text());
 
     } catch (Exception $e) {
              //echo $e;
@@ -560,13 +565,13 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
 
         // ==============ruturn amount============================
 
-        $return_data =DB::select('SELECT * FROM return_sds order by returns_sd_month desc;');
+        // $return_data =DB::select('SELECT * FROM return_sds order by returns_sd_month desc;');
         // dd(round($Return_data[0]->sd_amount*0.75/100));
 
-        $months=[];
-        foreach($return_data as $data) {
-            array_push($months, $data->returns_sd_month);
-        }
+        // $months=[];
+        // foreach($return_data as $data) {
+        //     array_push($months, $data->returns_sd_month);
+        // }
 
         // dd($months);
 
@@ -575,7 +580,7 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
         //     array_push($returnValue, $data->sd_amount);
         // }
 
-        $return_sd_amount = round($return_data[0]->sd_amount*0.75/100);
+        // $return_sd_amount = round($return_data[0]->sd_amount*0.75/100);
         // dd($return_sd_amount);
 
 
