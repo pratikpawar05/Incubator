@@ -12,7 +12,7 @@ class OccupancyController extends Controller
 {
     public function occupancy() {
         $data = Occupancy::all();
-        $data = DB::select('SELECT  company_masters.id, company_masters.company_registered_name, company_masters.brand_name,count(*) as no_of_seats FROM admin.occupancies
+        $data = DB::select('SELECT  company_masters.id, company_masters.company_registered_name, company_masters.brand_name,count(*) as no_of_seats FROM occupancies
         join company_masters on company_masters.id = occupancies.company
         join employeelists on employeelists.member_id = occupancies.company
         where employeelists.status="1" AND company_masters.status="Active"
@@ -26,7 +26,7 @@ class OccupancyController extends Controller
             // dd($data[$key]->percentage);
         }
 
-        $pie_graph = DB::select('SELECT  company_masters.id, company_masters.company_registered_name, company_masters.brand_name,count(*) as no_of_seats FROM admin.occupancies
+        $pie_graph = DB::select('SELECT  company_masters.id, company_masters.company_registered_name, company_masters.brand_name,count(*) as no_of_seats FROM occupancies
         join company_masters on company_masters.id = occupancies.company
         join employeelists on employeelists.member_id = occupancies.company
         where employeelists.status="1" AND company_masters.status="Active"
@@ -58,7 +58,7 @@ class OccupancyController extends Controller
         $currentDate =  $today->format('Y-m');
         // $currentDate =  "2020-05";
         // dd($currentDate);
-        $db_company = DB::select('SELECT company_masters.id, company_masters.company_registered_name FROM admin.company_masters');
+        $db_company = DB::select('SELECT company_masters.id, company_masters.company_registered_name FROM company_masters');
         $company = [];
         foreach ($db_company as $value) {
             $db_seats = DB::select('SELECT no_of_seats as occupancy from company_revenues where company_id = ? AND payment_month = ?', [$value->id, $currentDate]);
