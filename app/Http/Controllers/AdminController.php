@@ -145,7 +145,7 @@ class AdminController extends Controller
         // dd($revenue_data);
 
         /////////////////////////////Instagram Functionality///////////////////////////
-        $username = 'mewoworknest';
+        $username = 'instagram';
         $response = @file_get_contents("https://www.instagram.com/$username/?__a=1");
 
         if ($response !== false) {
@@ -161,6 +161,7 @@ class AdminController extends Controller
                 $instagram['followers'] = $followers;
                 $instagram['following'] = $following;
                 $instagram['profile'] = $profile;
+                // dd( $following);
             }
         } else {
             echo 'Username not found.';
@@ -407,7 +408,7 @@ class AdminController extends Controller
 
         $mewo_expense_data = round($mewo_expense/3517);
 
-        $tw_username = "MeWoWorkNest"; 
+        $tw_username = "TwitterIndia"; 
         // print_r($tw_username); die;
         $data = file_get_contents('https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names='.$tw_username); 
         $parsed =  json_decode($data,true);
@@ -419,7 +420,7 @@ class AdminController extends Controller
         
          $client = new Client();
         try {
-            $crawler = $client->request('GET',"https://en-gb.facebook.com/MeWoWorkNest?locale=en_GB");
+            $crawler = $client->request('GET',"https://en-gb.facebook.com/facebookappIndia?locale=en_GB");
             $x=$crawler->filter('div[class=_4bl9]')->eq(1);
             $y=$crawler->filter('div[class=_4bl9]')->eq(0);
             $facebook_follower_count=explode(" ",$x->text())[0];
@@ -625,16 +626,13 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
         }
         // dd();
 
-        $revenue_per_sq_feet = round($total_revenue[0]["amount"]/3517);
-        // dd($current_expense);
-
 
         $db_expense1 = DB::select('select date, total from expenses order by date desc');
 
 
 
         // ===============End Return======================================
-        return view('dashboard.index', compact( 'instagram','profit_value1' ,'member_count','db_expense1', 'employee_count', 'Member_data', 'expense', 'revenue', 'dates', 'revenue_data', 'current_expense', 'current_revenue', 'DepositeReceived', 'male', 'female', 'profit_value', 'total_revenue_value1', 'mewo', 'total_revenues', 'monthCount','month','employee_count', 'tw_followers','mewo_expense_data','facebook_follower_count','facebook_like_count','avg_data','check','profit_data_value','current_revenue_month','total_revenue_current_month','occupency','revenue_per_sq_feet','may_due_amount', 'occupancy_percentage_data','db_expense'));
+        return view('dashboard.index', compact( 'instagram','profit_value1' ,'member_count','db_expense1', 'employee_count', 'Member_data', 'expense', 'revenue', 'dates', 'revenue_data', 'current_expense', 'current_revenue', 'DepositeReceived', 'male', 'female', 'profit_value', 'total_revenue_value1', 'mewo', 'total_revenues', 'monthCount','month','employee_count', 'tw_followers','mewo_expense_data','facebook_follower_count','facebook_like_count','avg_data','check','profit_data_value','current_revenue_month','total_revenue_current_month','occupency','may_due_amount', 'occupancy_percentage_data','db_expense'));
         // return view("fonik_theme.index",compact('male','female'));
 
     }
