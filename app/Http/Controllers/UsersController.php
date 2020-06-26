@@ -46,7 +46,7 @@ class UsersController extends Controller
     {
         // dd('j');
 
-        $users_role =DB::select('SELECT * FROM admin.roles;');
+        $users_role =DB::select('SELECT * FROM roles;');
         // dd($users_role);
 
         $permissions = Permission::all();
