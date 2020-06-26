@@ -103,9 +103,4 @@ class PermissionController extends Controller
         return $response;
     }
 
-    // public function role_permission($role_id){
-
-            
-
-    // }
 }

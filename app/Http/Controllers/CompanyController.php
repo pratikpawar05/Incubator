@@ -19,32 +19,17 @@ class CompanyController extends Controller
 {
     public function companyDetails()
     {
-        // $role_id = auth()->user()->role_id;
-        // // dd($role_id);
-        
-        // $permission = DB::select("SELECT permission ,module 
-        // FROM permissions as pr
-        // LEFT JOIN role_permissions as rp 
-        // ON pr.id = rp.permission_id where permission_id = ".$role_id."  && role_id = ".$role_id.";");
-
-        // dd($permission);
         $memberdata = CompanyMaster::orderBy('updated_at', 'DESC')->orderBy('status')->get();
-        // dd($memberdata);
-
         return view('company.index', compact('memberdata'));
     }
 
     public function addCompany()
     {
-
         return view('company.create_company');
     }
 
     public function viewCompanyDetails($id, $check=null)
     {
-        // dd($check);
-
-
         if($check!=null){
         $member = CompanyMaster::find((int)$id);
         $company_deal = CompanyDeal::where('company_id', $id)->get();
@@ -60,10 +45,7 @@ class CompanyController extends Controller
             $director_count = 1;
 
          $company_image = DB::select("SELECT banner_source FROM company_masters where id = "."'".$id."'".";");
-        // dd($company_image[0]);
         $image_mewo = $company_image[0]->banner_source;
-
-        // dd($image_mewo);
 
         return view('company.view_company', ["member" => $member, "company_deal" => $company_deal, "deal_structure" => $structure_count, "deal_director" => $director_count, "company_docs" => $company_docs[0], "id" => $id,"check"=>$check],compact('image_mewo'));
 
@@ -87,10 +69,6 @@ class CompanyController extends Controller
 
     public function storeCompany(Request $req, $company_id)
     {
-        // $this->validate($req,[
-        //         'company_registered_name'=>'required|max:35',
-        // ]);
-
         if ((int)$company_id == 0) {
             $flag = CompanyMaster::where('company_registered_name', $req->company_registered_name)->first();
             if ($flag) {
@@ -141,8 +119,6 @@ class CompanyController extends Controller
             $response["company_id"] = null;
             return $response;
         }
-        // $memberdata = CompanyMaster::orderBy('updated_at', 'DESC')->orderBy('status')->get();
-        // return view('company.index',compact('memberdata'));
     }
 
     public function storeCompanyDeal(Request $request, $company_id)
@@ -268,12 +244,6 @@ class CompanyController extends Controller
         $commas = CompanyMaster::find($id)->delete();
         $comdeal = CompanyDeal::where('company_id', '=', $id)->delete();
         $comdoc = CompanyDocument::where('company_id', '=', $id)->delete();
-        // if ($commas && $comdeal && $comdoc) {
-        //     $response["status"] = "success";
-        // } else {
-        //     $response["status"] = "failure";
-        // }
-        // return $response;
         session()->flash('success', 'Succesfully Deleted The Company');
         return redirect("companyDetails");
     }

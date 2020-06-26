@@ -39,9 +39,6 @@ class RevenueController extends Controller
 
     public function expense()
     {
-
-
-
         return view('revenue.expense');
     }
 
@@ -784,35 +781,7 @@ FROM admin.revenues;');
         ////////////////Code for graph display//////////////////////////
 
 
-
-
-        // $revenue_data = DB::select('SELECT payment_month, (total_amt + monthly_rent) as total_amount 
-        //                             from(
-        //                                 select payment_month , total_amt 
-        //                                 from additional_revenues
-        //                                 union all
-        //                                 select payment_month , monthly_rent 
-        //                                 from company_revenues
-        //                             )t
-        //                             group by payment_month 
-        //                             order by payment_month desc limit 5;');
-
-        // $revenue_data = DB::select('SELECT payment_month , total_amt 
-        //                                 from additional_revenues
-        //                                 union all
-        //                                 select payment_month , monthly_rent 
-        //                                 from company_revenues
-        //                             ');
-
-        // $revenue_data = DB::select('SELECT monthly_rent as ramount, total_amt as aamount from(SELECT monthly_rent from company_revenues union all SELECT total_amt from additional_revenues)t');
-
         $revenue_data = DB::select("SELECT company_revenues.payment_month as rm, company_revenues.monthly_rent, additional_revenues.payment_month as am, additional_revenues.total_amt from company_revenues RIGHT JOIN additional_revenues ON company_revenues.payment_month = additional_revenues.payment_month");        
-
-        // dd($revenue_data);
-
-
-
-
 
 
         $db_revenues = DB::select('SELECT company_masters.id, company_revenues.payment_month, SUM(company_revenues.no_of_seats) as no_of_seats, company_revenues.price_per_seat,SUM(company_revenues.monthly_rent) as monthly_rent, occupancies.percentage, SUM(company_revenues.amount_received) as amount_received, company_revenues.company_id from company_masters join company_revenues on company_masters.id = company_revenues.company_id join occupancies on company_masters.id = occupancies.company group by company_revenues.payment_month');

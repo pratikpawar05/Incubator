@@ -216,20 +216,14 @@ pre {
                                         <li><a href="{{url('expense/index')}}">Monthly Expense</a></li>
                                         <li><a href="{{ url('profit_vs_burns')}}">Monthly P&L</a></li>
                                         <li><a href="{{ url('monthly_due') }}"> Monthly Due</a></li>
-                                        <li><a href="{{ url('security_deposits')}}"> Security Deposits</a></li>
-                                        <li><a  href="{{ url('read_return_sd')}}">Return on SD</a></li>
-                                        <li><a  href="{{ url('advance_deposits')}}">Advance Deposits</a></li>
                                     </ul>
                                 </li>
                                 <li>
                                     <ul>
-                                       <li><a href="{{ url('averagePrice') }}">Average Price</a></li>
                                         <li><a href="{{ url('activeCompany') }}">Active Companies</a></li>
                                         <li><a href="{{ url('fonik_active_member') }}"> Active Members</a></li>
                                         <li><a href="{{url('meeting_room_without_login')}}">Meeting Room hours</a></li>
                                         <li><a href="#">Monthly Events</a></li>
-                                        <li><a href="{{url('operational_breakeven')}}">Operational Breakeven</a></li>
-                                       
                                     </ul>
                                 </li>
                             </ul>
