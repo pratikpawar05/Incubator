@@ -425,15 +425,10 @@ class AdminController extends Controller
             $y=$crawler->filter('div[class=_4bl9]')->eq(0);
             $facebook_follower_count=explode(" ",$x->text())[0];
             $facebook_like_count=explode(" ",$y->text())[0];
-            
-            //     $crawler->filter('div[class=_4bl9]')->each(function ($node,$i){
-        //     if ($i==1) {
-        //         $headline = $node->text();
-        //         $GLOBALS['a'] = explode(" ",$headline)[0];
-        //         //print_r($facebook_follower_count);
-                
-        //     }
-        // });
+
+            // $twitter=$client->request('GET',"https://twitter.com/TwitterIndia?lang=en-GB");
+            // $temp=$twitter->filter('div');
+            // dd($temp->html());
 
     } catch (Exception $e) {
              //echo $e;
@@ -454,9 +449,9 @@ class AdminController extends Controller
 
         ////////////////Code for graph display//////////////////////////
 
-$db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.payment_month, SUM(company_revenues.no_of_seats) as no_of_seats, company_revenues.price_per_seat,SUM(company_revenues.monthly_rent) as monthly_rent, occupancies.percentage, SUM(company_revenues.amount_received) as amount_received, company_revenues.company_id from company_masters join company_revenues on company_masters.id = company_revenues.company_id join occupancies on company_masters.id = occupancies.company group by company_revenues.payment_month ');
-        // $db_revenues = DB::select('SELECT company_masters.id, company_revenues.payment_month, company_deals.no_of_desk, company_revenues.price_per_seat,SUM(company_revenues.monthly_rent) as monthly_rent, occupancies.percentage, SUM(company_revenues.amount_received) as amount_received, company_revenues.company_id from company_masters join company_revenues on company_masters.id = company_revenues.company_id join occupancies on company_masters.id = occupancies.company join company_deals on company_deals.company_id = company_revenues.company_id group by company_revenues.payment_month ');
-
+// $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.payment_month, SUM(company_revenues.no_of_seats) as no_of_seats, company_revenues.price_per_seat,SUM(company_revenues.monthly_rent) as monthly_rent, occupancies.percentage, SUM(company_revenues.amount_received) as amount_received, company_revenues.company_id from company_masters join company_revenues on company_masters.id = company_revenues.company_id join occupancies on company_masters.id = occupancies.company group by company_revenues.payment_month ');
+$db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.payment_month, SUM(company_revenues.no_of_seats) as no_of_seats, company_revenues.price_per_seat,SUM(company_revenues.monthly_rent) as monthly_rent, SUM(company_revenues.amount_received) as amount_received, company_revenues.company_id from company_masters join company_revenues on company_masters.id = company_revenues.company_id group by company_revenues.payment_month ');
+  
 
         // dd($db_revenues);
 
@@ -477,8 +472,7 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
         }
         
 
-        //dd($temp2);
-        //dd($temp1);
+        
         $check = [];
         foreach ($db_revenues as $key => $value) {
             # code.monthly_rent
@@ -487,7 +481,7 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
                 $dateObj   = \DateTime::createFromFormat('Y-m-j', $value->payment_month . "-10");
                 $monthName = $dateObj->format('Y-F');
                // print_r($value->payment_month);
-               array_push($check, ["date" => $monthName, "payment_month" => $value->payment_month, "no_of_seats" => (int)$value->no_of_seats,"percentage" => $value->percentage, "total_revenue" => $value->monthly_rent,"amount_received"=>$value->amount_received]);
+               array_push($check, ["date" => $monthName, "payment_month" => $value->payment_month, "no_of_seats" => (int)$value->no_of_seats,"total_revenue" => $value->monthly_rent,"amount_received"=>$value->amount_received]);
             } 
             else {
                 $a = 0;
@@ -506,7 +500,7 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
                        
                     }
                 }
-                array_push($check, ["date" => $monthName, "payment_month" => $value->payment_month, "no_of_seats" => (int)$value->no_of_seats,"percentage" => $value->percentage, "total_revenue" => $value->monthly_rent + $a, "amount_received"=>$value->amount_received+ $b]);
+                array_push($check, ["date" => $monthName, "payment_month" => $value->payment_month, "no_of_seats" => (int)$value->no_of_seats, "total_revenue" => $value->monthly_rent + $a, "amount_received"=>$value->amount_received+ $b]);
             }
         }
 
@@ -518,7 +512,7 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
             if (!in_array($value->payment_month, $temp2)) {
                 $dateObj   = \DateTime::createFromFormat('Y-m', $value->payment_month);
                 $monthName = $dateObj->format('Y-F');
-                array_push($check, ["date" => $monthName, "payment_month" => $value->payment_month, "no_of_seats" => 0, "percentage" => 0,  "total_revenue" => $value->total_amount,"amount_received"=>$value->amount_received]);
+                array_push($check, ["date" => $monthName, "payment_month" => $value->payment_month, "no_of_seats" => 0, "total_revenue" => $value->total_amount,"amount_received"=>$value->amount_received]);
             }
         }
         // dd($check);
@@ -532,7 +526,7 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
             // dd($value);
             $occupency[] = round($value["no_of_seats"]/90*100);
         }
-
+        // dd($occupency);
         $occupancy_percentage_data = DB::select('SELECT SUM(no_of_desk) as occupancy from company_deals');
 
         if (empty($occupancy_percentage_data))
