@@ -48,6 +48,6 @@
             }
         </style>
     </head>
-    <body style="background-image: url('assets/401.png');">
+    <body style="background-image: url('/assets/401.png');">
     </body>
 </html>
