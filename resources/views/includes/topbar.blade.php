@@ -17,7 +17,7 @@ pre {
 .round { border-radius: 50%; }
 
 .navigation-menu-distance li {
-    padding-right: 4%;
+    padding-right: 2%;
 }
 
     </style>
