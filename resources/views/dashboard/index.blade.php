@@ -9,8 +9,8 @@
     font-variant: normal;
         }
         .size_badhao1{
-    font-size: 1.6em;
-    font-weight: 900;
+    font-size: 1.5em;
+    font-weight: 800;
     font-variant: normal;
         }
     </style>
@@ -472,7 +472,7 @@ a{
                           <div class="box-part text-center">
                            <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
                            <div class="title">
-                          <h4 class="size_badhao1 ">TWITTER :FOLLOW</h4>
+                          <h4 class="size_badhao1 ">TWITTER :FOLLOWERS</h4>
                             <span class="money" style=" color:#449D44;font-size:1.5em;
                                                       font-weight: 700;
                                                       font-variant: normal;
@@ -493,7 +493,7 @@ a{
                         <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
 
                         <div class="title">
-                        <h4 class="size_badhao1 ">TWITTER :FOLLOW</h4>
+                        <h4 class="size_badhao1 ">TWITTER :FOLLOWING</h4>
                          <span class="money" style=" color:#449D44;font-size:1.5em;
                                                       font-weight: 700;
                                                       font-variant: normal;
