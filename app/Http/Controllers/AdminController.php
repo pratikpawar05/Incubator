@@ -18,11 +18,6 @@ class AdminController extends Controller
     public function fonikIndex()
     {
 
-        $data = DB::select('SELECT * FROM admin.sales_data where Stage_of_client= "HOT";');
-        $count_sales = count($data);
-
-        // $visitors_data = Add_visitor::all();
-        // $visitor_count = count($visitors_data);
 
         $data = DB::select('SELECT * FROM admin.company_masters where status = "1";');
         $member_count = count($data);
@@ -170,13 +165,8 @@ class AdminController extends Controller
         } else {
             echo 'Username not found.';
         }
-        ///////////////////////////////////////////////////////////////////////////////
-
-        // $data = user::where('id', auth()->user()->id)->first();
-        // $name = $data->name;
-        // $name_pass = $name[0];
-        // 
-
+    
+        
         $current_revenue = DB::select('SELECT payment_month as label, sum(total_amt) value 
                                     from(
                                         select payment_month , total_amt 
@@ -232,31 +222,6 @@ class AdminController extends Controller
         $today = Carbon::now();
         $lastMonth =  $today->subMonth()->format('m'); // 11
 
-
-        // $monthCount = [];
-        // $t = [];
-        // foreach ($monthEmployee as $key => $value) {
-        //     # code...
-        //     $x = (array) $value;
-        //     array_push($t, $x['months']);
-        //     if ((int) $x['months'] > $lastMonth + 1) {
-        //         $monthCount['2019-' . $x['months']] = (int) $x['count'];
-        //     } else {
-        //         $monthCount['2020-' . $x['months']] = (int) $x['count'];
-        //     }
-        // }
-
-
-        // for ($i = 1; $i < 13; $i++) {
-        //     if (!in_array((string) $i, array_values($t)) and $i > $lastMonth + 1) {
-        //         $monthCount['2019-' . "0" . (string) $i] = 0;
-        //     } else if (!in_array((string) $i, array_values($t)) and $i <= $lastMonth + 1) {
-        //         $monthCount['2020-' . "0" . (string) $i] = 0;
-        //     }
-        // }
-
-
-
         foreach ($total_revenue as $key => $value) {
             if (!in_array($key, array_keys($monthCount)))
                 $monthCount[$key] = 0;
@@ -286,10 +251,6 @@ class AdminController extends Controller
         //print_r($monthCount);
 
 
-        // return view('fonik_theme.index', compact('visitor_count', 'instagram', 'profilePic', 'userData', 'member_count', 'gender', 'count_sales', 'employee_count', 'Member_data', 'expense', 'revenue', 'dates', 'revenue_data', 'current_expense','current_revenue','DepositeReceived','male','female'));
-        // dd($male);
-
-
 
         $lastMonthObj = $today->year . "-" . $lastMonth;
            // dd($lastMonth);
@@ -306,39 +267,6 @@ class AdminController extends Controller
 
         $date = $today->year . '-' . $today->month;
         // dd($date);
-
-        $counsumption_data_dashboard = DB::select('SELECT tea_cofee/seats as tea_cofee, internet/seats as internet, ellectricity_units/seats as ellectricity_units, water_liters/seats as water_liters, huose_keeping/seats as huose_keeping  from admin.consumptions 
-where consumption_month = "2020-05" ;');
-        // dd($counsumption_data_dashboard); 
-
-        // ============Monthly Collection begins
-        // $date = \Carbon\Carbon::now();
-           //  $today = Carbon::now();
-
-           //  $lastMonth =  $today->subMonth()->format('m'); // 11
-    
-
-           //  $lastMonthObj = $today->year."-".$lastMonth;
-           //          //    dd($date);
-           // $query = "SELECT FLOOR(internet/90) as internet, FLOOR(ellectricity_units/90) as ellectricity_units, FLOOR(ac_units/90) as ac_units, FLOOR(tea_cofee/90) as tea_cofee, FLOOR(water_liters/90) as water_liters, FLOOR(huose_keeping/90) as huose_keeping  FROM admin.consumptions where consumption_month like "."'%".$lastMonthObj.""."%'".";";
-
-           // // dd($query);
-           // $current_consumption_month = DB::select($query);
-           // // dd($current_consumption_month);
-           //  if(count($current_consumption_month)!=0) {
-           //      $current_consumption_month = $current_consumption_month[0];
-           //  }
-
-           //  $date = $today->year.'-'.$today->month;
-
-            // $current_consumption_month = Consumption::orderBy('id', 'DESC')->get();
-            // dd($current_consumption_month);
-
-
-
-
-
-
 
 
         $query = "SELECT  sum(amount_received) as amount_received, payment_month  FROM admin.company_revenues group by payment_month;";
@@ -706,7 +634,7 @@ $db_revenues = DB::select('SELECT DISTINCT company_masters.id, company_revenues.
 
 
         // ===============End Return======================================
-        return view('dashboard.index', compact( 'instagram','profit_value1' ,'member_count','db_expense1', 'count_sales', 'employee_count', 'Member_data', 'expense', 'revenue', 'dates', 'revenue_data', 'current_expense', 'current_revenue', 'DepositeReceived', 'male', 'female', 'current_consumption_month', 'profit_value', 'total_revenue_value1', 'mewo', 'total_revenues', 'monthCount','month','employee_count', 'tw_followers','mewo_expense_data','facebook_follower_count','facebook_like_count','avg_data','check','profit_data_value','current_revenue_month','total_revenue_current_month','return_sd_amount','occupency','revenue_per_sq_feet','may_due_amount','counsumption_data_dashboard', 'occupancy_percentage_data','db_expense'));
+        return view('dashboard.index', compact( 'instagram','profit_value1' ,'member_count','db_expense1', 'employee_count', 'Member_data', 'expense', 'revenue', 'dates', 'revenue_data', 'current_expense', 'current_revenue', 'DepositeReceived', 'male', 'female', 'profit_value', 'total_revenue_value1', 'mewo', 'total_revenues', 'monthCount','month','employee_count', 'tw_followers','mewo_expense_data','facebook_follower_count','facebook_like_count','avg_data','check','profit_data_value','current_revenue_month','total_revenue_current_month','occupency','revenue_per_sq_feet','may_due_amount', 'occupancy_percentage_data','db_expense'));
         // return view("fonik_theme.index",compact('male','female'));
 
     }
