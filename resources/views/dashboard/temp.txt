@@ -1,1 +1,71 @@
-           line no 608                <span style="color: #89CFF0;" class="busines_titile">{{(int)($pl_data_C[0])}}</span><br>
+            <div class="row">
+                <a href="{{url('averagePrice')}}">
+
+                    <div class="width_change">
+                        <div class="card text-center m-b-30 dashboard_card">
+                            <div class="mb-2 card-body text-muted">
+                                <h4 class="text-info size_badhao1">INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
+                                                                        echo $fmt->format((int) ($avg_data)) ?>
+
+                                </h4>
+                                <span class="size_badhao">Average Price</span>
+                            </div>
+                        </div>
+                </a>
+            </div>
+
+
+            <div class="width_change">
+                <a href="{{url('operational_breakeven')}}">
+                    <div class="card text-center m-b-30 dashboard_card">
+                        <div class="mb-2 card-body text-muted">
+                            <h4 class="text-purple size_badhao1">INR 7,900</h4>
+                            <span class="size_badhao">Operational Breakeven</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- <div class="width_change">
+                        <a href="{{url('/fonik_active_member')}}"> 
+                        <div class="card text-center m-b-30 dashboard_card">
+                            <div class="mb-2 card-body text-muted">
+                                <h4 class="text-primary">{{$employee_count}}</h4>
+                                Active Members
+                            </div>
+                        </div>
+                        </a>
+                    </div> -->
+
+            <div class="width_change">
+                <a href="{{url('/read_return_sd')}}">
+                    <div class="card text-center m-b-30 dashboard_card">
+                        <div class="mb-2 card-body text-muted">
+                            <h4 class="text-primary size_badhao1">
+                                INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
+                                    echo $fmt->format((int) ($return_sd_amount)) ?>
+                            </h4>
+                            <span class="size_badhao">Returns on SD</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="width_change">
+                <a href="{{url('meeting_room_without_login')}}">
+                    <div class="card text-center m-b-30 dashboard_card">
+                        <div class="mb-2 card-body text-muted">
+                            <h4 class="text-danger money size_badhao1">1240</h4>
+                            <span class="size_badhao">Meeting Room hours</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="width_change">
+                <div class="card text-center m-b-30 dashboard_card">
+                    <div class="mb-2 card-body text-muted">
+                        <h4 class="text-danger money size_badhao1">2</h4>
+                        <span class="size_badhao">Monthly Events</span>
+                    </div>
+                </div>
+            </div>

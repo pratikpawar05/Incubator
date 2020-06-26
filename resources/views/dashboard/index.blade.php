@@ -230,103 +230,19 @@ a{
                         </div>
                        </a>
                     </div>
+
                     <div class="width_change">
-                        <a href="{{url('security_deposits')}}">
-                        <div class="card text-center m-b-30 dashboard_card">
-                            <div class="mb-2 card-body text-muted">
-                                <h4 class="text-danger size_badhao1">INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
-                                            echo $fmt->format($DepositeReceived) ?>
-                                            
-                                            </h4>
-                                <span class="size_badhao">Security Deposit</span>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-
-                </div>
-                <!-- end row -->
-                <div class="row">
-                    <a href="{{url('averagePrice')}}">
-
-                        <div class="width_change">
-                            <div class="card text-center m-b-30 dashboard_card">
-                                <div class="mb-2 card-body text-muted">
-                                    <h4 class="text-info size_badhao1">INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
-                                            echo $fmt->format((int)($avg_data)) ?>
-                                            
-                                    </h4>
-                                    <span class="size_badhao">Average Price</span>
-                                </div>
-                            </div>
-                    </a>
-                    </div>
-                    <!-- <div class="width_change">
                         <a href="{{url('activeCompany')}}">
                         <div class="card text-center m-b-30 dashboard_card">
                             <div class="mb-2 card-body text-muted">
-                                <h4 class="text-purple">{{$member_count}}</h4>
-                                Active Companies
-                            </div>
-                        </div>
-                        </a>
-                    </div> -->
-
-                    <div class="width_change">
-                        <a href="{{url('operational_breakeven')}}">
-                        <div class="card text-center m-b-30 dashboard_card">
-                            <div class="mb-2 card-body text-muted">
-                                <h4 class="text-purple size_badhao1">INR 7,900</h4>
-                                <span class="size_badhao">Operational Breakeven</span>
+                                <h4 class="text-purple size_badhao1">{{$member_count}}</h4>
+                                <span class="size_badhao"> Active Companies</span>
                             </div>
                         </div>
                         </a>
                     </div>
-
-                    <!-- <div class="width_change">
-                        <a href="{{url('/fonik_active_member')}}"> 
-                        <div class="card text-center m-b-30 dashboard_card">
-                            <div class="mb-2 card-body text-muted">
-                                <h4 class="text-primary">{{$employee_count}}</h4>
-                                Active Members
-                            </div>
-                        </div>
-                        </a>
-                    </div> -->
-
-                    <div class="width_change">
-                        <a href="{{url('/read_return_sd')}}"> 
-                        <div class="card text-center m-b-30 dashboard_card">
-                            <div class="mb-2 card-body text-muted">
-                                <h4 class="text-primary size_badhao1">
-                                INR <?php $fmt = new NumberFormatter($locale = 'en_IN', NumberFormatter::DECIMAL);
-                                            echo $fmt->format((int)($return_sd_amount)) ?>                                
-                                </h4>
-                                <span class="size_badhao">Returns on SD</span>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="width_change">
-                        <a href="{{url('meeting_room_without_login')}}">
-                        <div class="card text-center m-b-30 dashboard_card">
-                            <div class="mb-2 card-body text-muted">
-                                <h4 class="text-danger money size_badhao1">1240</h4>
-                                <span class="size_badhao">Meeting Room hours</span>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
- 
-                    <div class="width_change">
-                        <div class="card text-center m-b-30 dashboard_card">
-                            <div class="mb-2 card-body text-muted">
-                                <h4 class="text-danger money size_badhao1">2</h4>
-                                <span class="size_badhao">Monthly Events</span>
-                            </div>
-                        </div>
-                    </div>
-
+                </div>
+                <!-- end row -->
                 </div>
                 @endif
                 <br>
@@ -575,102 +491,8 @@ a{
                 @endif
 
 
-                <!-- end row -->
-                <div style="text-align: center; margin: 0 auto;" class="row ">
-                 @if (Auth::user()->isAuthenticated("Business per sq ft", "v"))
-                    <div class="col-md-8 offset-md-2 font_family">
-                        <div class="card m-b-30 card-body dashboard_card">
-                            <!-- <h3 class="card-title font-20 mt-0 css_changes">Business Per Square Feet</h3> -->
-                            <span style="text-decoration: underline;" class="css_changes">BUSINESS PER SQ FT</span>
-                            <div class="row">
-                                
-                                    
-                                <div class="col-sm-4">
-                                    
-                            <a href="{{url('consumption_revenue')}}">
-                            <span class="busines_titile">{{$revenue_per_sq_feet}}</span><br>
-                            <span class="business_sq">REVENUE PER SQ FT</span>
-
-                                </a>
-                                </div>
-                            <div class="col-sm-4">
-                              
-                            <a href="{{url('expense_sq')}}">
-                                
-                           <span style="color:#449D44;" class="busines_titile">{{ (int)($mewo_expense_data) }}</span><br>
-                            <span class="business_sq">EXPENSE PER SQ FT</span>
-                            </a>    
-                                </div>
-                                <div class="col-sm-4">
-                                    
-                            <a href="{{url('profit_sq')}}">
-                                
-                            <span class="business_sq"> P&L PER SQ FT</span>
-                            </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-                    @if (Auth::user()->isAuthenticated("Per person consumption", "v"))
-                    <div class="col-md-12  font_family">
-                        <div style="width: 1250px;margin-left: -12px;" class="card m-b-30 card-body dashboard_card  ">
-                            <!-- <h2 class="card-title font-21 mt-0 css_changes">Per Person Consumption</h2> -->
-                            <span style="text-decoration: underline;" class="css_changes">PER SQ FT CONSUMPTION</span>
-                            <div class="row">
-                                <div  class="mb-2 col-sm-2">
-                                    
-                            <a href="{{url('internet_consumption')}}">
-                                
-                            <span class="per_person_css">{{(int) (round($counsumption_data_dashboard[0]->internet)) }}</span><br>
-                            <span class="per_person_css2">INTERNET</span>
-
-                            </a>
-                                </div>
-                            <div  class="mb-2 col-sm-3">
-                                  
-                            <a href="{{url('ellectricity_consumption')}}">
-                                
-                           <span class="per_person_css">{{(int)(round($counsumption_data_dashboard[0]->ellectricity_units))}}</span><br>
-                            <span class="per_person_css2">ELECTRICITY</span>
-                            
-                            </a>    
-                                </div>
-
-                                <div class="mb-2 col-sm-3">
-                                    
-                            <a href="{{url('tea_cofee')}}">
-                                
-                            <span class="per_person_css">{{ (int)(round($counsumption_data_dashboard[0]->tea_cofee)) }}</span><br>
-                            <span class="per_person_css2">TEA/COFFEE</span>
-                            </a>
-
-                                </div>
-                            <div class="mb-2 col-sm-2">
-                                    
-                            <a href="{{url('water_liter')}}">
-                                
-                           <span class="per_person_css">{{ (int)(round($counsumption_data_dashboard[0]->water_liters)) }}</span><br>
-                            <span class="per_person_css2">WATER</span>
-                            </a>
-                            </div>
-
-                            <div class="mb-2">
-                                    
-                        <a href="{{url('house_keeping')}}">
-                            
-                           <span class="per_person_css">{{ (int)(round($counsumption_data_dashboard[0]->huose_keeping)) }}</span><br>
-                            <span class="per_person_css2">HOUSEKEEPING</span>
-                        </a>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    @endif
-                </div>
-                    </div>
+                 </div>
+                    <!-- </div> --> -->
 
                 <div class="row">
 
