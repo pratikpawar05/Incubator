@@ -1,0 +1,2 @@
+{{ $instagram['following'] }}
+{{ $instagram['followers'] }}

@@ -542,7 +542,7 @@ a{
                         <span class="money" style=" color:#449D44;font-size: 1.5em;
                                               font-weight: 700;
                                               font-variant: normal;
-                                              letter-spacing: 1px;">{{ $instagram['following'] }}</span>
+                                              letter-spacing: 1px;">160</span>
                         </div>     
 
                         <a href="https://www.instagram.com/instagram" target="_blank">Learn More</a>
