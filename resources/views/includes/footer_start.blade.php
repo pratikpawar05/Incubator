@@ -3,7 +3,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        © 2020 TechnoMatrix <i class="mdi mdi-heart text-danger"></i> by Mustaro Pvt. Ltd.
+                        © 2020 TechnoMatrix <i class="mdi mdi-heart text-danger"></i> by R-TechSolutions Pvt. Ltd.
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section("title", "BizNest | Create Occupancy")
+@section("title", "TechnoMatrix | Create Occupancy")
 
 @section('content')
 <div class="container">

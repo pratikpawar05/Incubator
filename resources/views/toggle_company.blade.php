@@ -127,7 +127,7 @@
 
             <div class="m-t-40 text-center">
                 <p>Don't have an account ? <a href="{{ url('/register') }}" class="font-500 font-14 text-primary font-secondary"> Signup Now </a> </p>
-                <p>© 2020 BIZ Nest &nbsp;<i class="mdi mdi-heart text-danger"></i> by Mustaro Pvt. Ltd.</p>
+                <p>© 2020 TechnoMatrix &nbsp;<i class="mdi mdi-heart text-danger"></i> by R-TechSolutions Pvt. Ltd.</p>
             </div>
 
         </div>

@@ -59,14 +59,14 @@
            <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
             <div class="form-group">
               <label>Tenure</label>
-              <input value="{{$memberdataShow->tenure}}" type="text" name="tenure" class="form-control" placeholder="www.BizNest.co.in" readonly>
+              <input value="{{$memberdataShow->tenure}}" type="text" name="tenure" class="form-control" placeholder="incubator.technomatrix.live" readonly>
             </div>
           </div>
 
           <div class="col-lg-offset-0 col-lg-6 col-xs-12 col-sm-12">
             <div class="form-group">
               <label>Lock In</label>
-              <input type="text" name="Lock_in" class="form-control" placeholder="www.BizNest.co.in" value="{{$memberdataShow->Lock_in}}">
+              <input type="text" name="Lock_in" class="form-control" placeholder="incubator.technomatrix.live" value="{{$memberdataShow->Lock_in}}">
             </div>
           </div>
 

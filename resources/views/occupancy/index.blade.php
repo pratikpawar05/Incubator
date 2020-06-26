@@ -3,7 +3,7 @@
 <!-- @section('occupancy_internal_css')
 @endsection -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-@section("title", "BizNest | Occupancy")
+@section("title", "TechnoMatrix | Occupancy")
     <style type="text/css">
         @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
