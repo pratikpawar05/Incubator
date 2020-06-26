@@ -974,7 +974,7 @@ class UsersController extends Controller
         $role = auth()->user()->role_id;
         $profile = auth()->user()->user_logo;
         // dd($role);
-        $role_query = DB::select("SELECT role FROM admin.roles where id =".$role.";");
+        $role_query = DB::select("SELECT role FROM roles where id =".$role.";");
         // dd($role_query[0]->role);
         // dd($role_query);
         $role_select = $role_query[0]->role;
@@ -986,7 +986,7 @@ class UsersController extends Controller
         ON permissions.id = role_permissions.permission_id where role_id = ".$role.";");
 
         // dd($permissions);
-        $roles = DB::select('SELECT * FROM admin.roles;');
+        $roles = DB::select('SELECT * FROM roles;');
         // dd($roles);
         return view('profile.profile',compact('name','email','role_select','roles','profile'));
     }
